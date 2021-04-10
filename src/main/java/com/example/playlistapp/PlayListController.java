@@ -42,6 +42,11 @@ public class PlayListController {
        return  playListService.update(name,songName);
     }
 
+    @DeleteMapping("/playlist/{name}")
+    public Object deleteSongFromPlayList(@PathVariable String name,@RequestBody String songName) throws Exception {
+        return  playListService.delete(name,songName);
+    }
+
 //
 //    @GetMapping("playlist")
 //    public List<PlayListDto> getBooks(){

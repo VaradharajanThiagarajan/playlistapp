@@ -15,8 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -168,6 +167,47 @@ public class PlayListAppIT {
         .andExpect(jsonPath("[1]").value("Song 2"));
     }
 
+//    Given a playlist has songs
+//    When a song is removed
+//    Then the playlist have one less song
+
+    @Test
+    public void removeSongFromPlayList() throws Exception {
+        PlayListDto playListDto = new PlayListDto("playlistone");
+
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playListDto))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isCreated());
+
+        //Add a song
+        mockMvc.perform(post("/playlist/playlistone")
+                .content("Macarena")
+                .contentType(MediaType.TEXT_PLAIN)
+        ).andExpect(status().isOk());
 
 
-}
+        //Add another song
+        mockMvc.perform(post("/playlist/playlistone")
+                .content("Macarena 2")
+                .contentType(MediaType.TEXT_PLAIN)
+        ).andExpect(status().isOk());
+
+        mockMvc.perform(get("/playlist/playlistone")
+        ).andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(2));
+
+        mockMvc.perform(delete("/playlist/playlistone")
+                .content("Macarena 2")
+                .contentType(MediaType.TEXT_PLAIN)
+        ).andExpect(status().isOk());
+
+
+        mockMvc.perform(get("/playlist/playlistone")
+        ).andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(1));
+
+    }
+
+
+    }

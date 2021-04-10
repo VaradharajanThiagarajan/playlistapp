@@ -52,4 +52,16 @@ public class PlayListService {
         }
         return playListRepository.save(playListEntity);
     }
+
+    public Object delete(String playListName, String songName) {
+
+        PlayListEntity playListEntity=playListRepository.findByName(playListName);
+        if (playListEntity!=null){
+            playListEntity.deleteSong(songName);
+        }
+        else {
+            return new Exception("Playlist does not exist");
+        }
+        return playListRepository.save(playListEntity);
+    }
 }

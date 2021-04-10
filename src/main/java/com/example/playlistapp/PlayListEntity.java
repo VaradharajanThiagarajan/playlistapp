@@ -45,4 +45,8 @@ public class PlayListEntity {
     public void addSong(String song){
         songs.add(song);
     }
+
+    public void deleteSong(String songName) {
+        songs.remove(songName);
+    }
 }

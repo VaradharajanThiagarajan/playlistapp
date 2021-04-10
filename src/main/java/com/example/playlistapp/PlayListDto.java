@@ -13,4 +13,8 @@ public class PlayListDto {
 
     public PlayListDto() {
     }
+
+    public String getName() {
+        return name;
+    }
 }
