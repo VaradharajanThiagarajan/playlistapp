@@ -29,8 +29,8 @@ public class PlayListAppIT {
 
     @Test
     public void addPlayList() throws Exception {
-
         PlayListDto playListDto = new PlayListDto("playlistone");
+
         mockMvc.perform(post("/playlist")
                 .content(objectMapper.writeValueAsString(playListDto))
                 .contentType(MediaType.APPLICATION_JSON)

@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-
 public class PlayListController {
     PlayListService playListService;
-    public void PlayListController(PlayListService playListService){
+
+    public PlayListController(PlayListService playListService){
         this.playListService = playListService;
     }
 
@@ -18,8 +18,7 @@ public class PlayListController {
     @ResponseStatus(HttpStatus.CREATED)
     public void addPlayList(@RequestBody PlayListDto playListDto){
         this.playListService.create(playListDto);
-
- }
+    }
 
 //
 //    @GetMapping("playlist")

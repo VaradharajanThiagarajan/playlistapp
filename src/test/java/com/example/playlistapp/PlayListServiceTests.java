@@ -15,15 +15,14 @@ public class PlayListServiceTests {
 
     @InjectMocks
     PlayListService subject;
+
     @Test
     void create(){
-
         PlayListDto playListDto = new PlayListDto("playlisttwo");
         subject.create(playListDto);
         verify(playListRepository).save(
                 new PlayListEntity("playlisttwo")
         );
-
     }
 
 }
