@@ -104,7 +104,7 @@ public class PlayListAppIT {
         mockMvc.perform(post("/playlist/playlistone")
                 .content("Macarena")
                 .contentType(MediaType.TEXT_PLAIN)
-        ).andExpect(status().isCreated());
+        ).andExpect(status().isOk());
 
     }
 

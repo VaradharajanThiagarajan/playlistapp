@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,5 +36,25 @@ public class PlayListService {
             return new PlayListDto(playListEntity.getName());
         else
             return null;
+    }
+
+    public PlayListEntity getPLByName(String name) {
+       return playListRepository.findByName(name);
+    }
+
+    public Object update(String playListName, String songName) throws Exception {
+        ArrayList<String> songs=new ArrayList<>();
+        PlayListEntity playListEntity=playListRepository.findByName(playListName);
+        if (playListEntity!=null){
+            if (playListEntity.getSongs()!=null)songs=playListEntity.getSongs();
+            songs.add(songName);
+            playListEntity.setSongs(songs);
+
+
+        }
+        else {
+            return new Exception("Playlist does not exists");
+        }
+        return playListRepository.save(playListEntity);
     }
 }

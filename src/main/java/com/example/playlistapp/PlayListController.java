@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class PlayListController {
@@ -35,6 +34,17 @@ public class PlayListController {
     @GetMapping("/playlist/{name}")
     public ArrayList<String> getPlaylist(@PathVariable String name){
         return this.playListService.getPlayListByName(name);
+    }
+
+
+    @PostMapping("/playlist/{name}")
+    public Object postSongToPlayList(@PathVariable String name,@RequestBody String songName) throws Exception {
+
+
+
+       return  playListService.update(name,songName);
+
+
     }
 
 //

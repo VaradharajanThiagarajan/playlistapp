@@ -37,4 +37,8 @@ public class PlayListEntity {
     public ArrayList<String> getSongs() {
         return songs;
     }
+
+    public void setSongs(ArrayList<String> songs) {
+        this.songs = songs;
+    }
 }
