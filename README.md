@@ -15,3 +15,27 @@ in three environments listed below.
 3) docker build -t playlistservice:dev .
 4) docker run --name playlist1   --network playlistnetwork  -e PORT=8080  -e SPRING_PROFILES_ACTIVE=docker   -p 1000:8080  -d  playlistservice:dev
 
+
+## Instruction for Heroku 
+
+$ heroku login
+$ heroku container:login
+$ heroku container:push web
+$ heroku container:release web
+
+Finally verified the Herokuwebapp
+
+1)
+Did post method using postman
+{
+"name": "playlistone"
+
+    }
+
+2)
+https://playlistservice123.herokuapp.com/playlist
+
+https://playlistservice123.herokuapp.com/playlist/playlistone
+Above returned empty list, since there were no songs in the
+playlistone 
+
