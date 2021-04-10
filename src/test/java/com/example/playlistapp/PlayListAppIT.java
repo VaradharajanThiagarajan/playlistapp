@@ -32,7 +32,6 @@ public class PlayListAppIT {
 
         PlayListDto playListDto = new PlayListDto("playlistone");
         mockMvc.perform(post("/playlist")
-
                 .content(objectMapper.writeValueAsString(playListDto))
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isCreated());

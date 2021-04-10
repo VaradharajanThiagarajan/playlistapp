@@ -1,5 +1,7 @@
 package com.example.playlistapp;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 public class PlayListDto {
@@ -7,5 +9,8 @@ public class PlayListDto {
 
     public PlayListDto(String name) {
         this.name = name;
+    }
+
+    public PlayListDto() {
     }
 }
