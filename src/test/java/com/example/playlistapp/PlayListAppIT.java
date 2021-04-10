@@ -91,5 +91,21 @@ public class PlayListAppIT {
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(jsonPath("message").value("Playlist name cannot be blank"));
     }
+    @Test
+    public void addSongToPlayList() throws Exception {
+        PlayListDto playListDto = new PlayListDto("playlistone");
+
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playListDto))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isCreated());
+
+
+        mockMvc.perform(post("/playlist/playlistone")
+                .content("Macarena")
+                .contentType(MediaType.TEXT_PLAIN)
+        ).andExpect(status().isCreated());
+
+    }
 
 }
