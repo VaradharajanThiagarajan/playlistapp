@@ -3,7 +3,9 @@ package com.example.playlistapp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlayListService {
@@ -21,7 +23,11 @@ public class PlayListService {
     }
 
 
-    public List<Object> getPlayListByName(String playlistName) {
-        return this.playListRepository.findByName(playlistName).g;
+    public ArrayList<String> getPlayListByName(String playlistName) {
+        PlayListEntity playListEntity= this.playListRepository.findAll().stream()
+                .filter(p -> p.getName().equals(playlistName)
+        ).collect(Collectors.toList()).stream().findFirst().orElse(null);
+
+        return playListEntity.getSongs();
     }
 }

@@ -8,5 +8,4 @@ import java.util.List;
 @Repository
 public interface PlayListRepository extends JpaRepository <PlayListEntity,Long > {
 
-    List<Object> findByName(String playlistName);
 }

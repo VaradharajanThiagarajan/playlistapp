@@ -22,7 +22,7 @@ public class PlayListController {
 
 
     @GetMapping("/playlist/{name}")
-    public List<Object> getPlaylist(@PathVariable String name){
+    public ArrayList<String> getPlaylist(@PathVariable String name){
         return this.playListService.getPlayListByName(name);
     }
 
