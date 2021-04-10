@@ -18,12 +18,16 @@ public class PlayListController {
     @ResponseStatus(HttpStatus.CREATED)
     public Object addPlayList(@RequestBody PlayListDto playListDto){
         PlayListDto playListDto1 = this.playListService.findByName(playListDto);
-        if (playListDto1 == null) {
-            this.playListService.create(playListDto);
-            return null;
+
+        if (playListDto.getName().trim().equals("")){
+            return new Exception("Playlist name cannot be blank");
+        }
+        else if (playListDto1 != null) {
+            return new Exception("Playlist already exists");
         }
         else{
-            return new Exception("Playlist already exists");
+            this.playListService.create(playListDto);
+            return null;
         }
     }
 
