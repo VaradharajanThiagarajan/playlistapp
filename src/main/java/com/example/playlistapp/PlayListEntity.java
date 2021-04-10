@@ -23,6 +23,10 @@ public class PlayListEntity {
 
     ArrayList<String> songs= new ArrayList<>();
 
+    public String getName() {
+        return name;
+    }
+
     public PlayListEntity(String name) {
         this.name = name;
     }

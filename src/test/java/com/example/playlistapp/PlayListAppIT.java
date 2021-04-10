@@ -10,6 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,7 +37,8 @@ public class PlayListAppIT {
         mockMvc.perform(post("/playlist")
                 .content(objectMapper.writeValueAsString(playListDto))
                 .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isCreated());
+        ).andExpect(status().isCreated())
+         .andDo(document("AddPlayList"));
 
 //        mockMvc.perform(get("/playlist")
 //        ).andExpect(status().isOk())
@@ -54,7 +58,8 @@ public class PlayListAppIT {
 
         mockMvc.perform(get("/playlist/playlistone")
         ).andExpect(status().isOk())
-                .andExpect(jsonPath("length()").value(0));
+                .andExpect(jsonPath("length()").value(0))
+                .andDo(document("playlistone"));
     }
 
 }
