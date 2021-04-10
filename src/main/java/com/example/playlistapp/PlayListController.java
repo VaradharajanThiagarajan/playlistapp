@@ -15,4 +15,7 @@ public class PlayListController {
     public void addPlayList(){
 
     }
+
+    @GetMapping("playlist")
+    public String getPlayList(){return "[{}]"; }
 }
