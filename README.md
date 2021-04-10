@@ -9,9 +9,9 @@ in three environments listed below.
 
 ## Instructions for Execution in Docker container hosted in your local desktop( windows Powershell)
 
-### command 1 - Define the ipaddress123 variable using the docker inspect command. in the below command <my-guestpostgres> is the container name.
-### of postgres
-$ipaddress123 = docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <my-guestpostgres>
+### command 1 - Define the network and add the postgres as well as springboot application container to the network
+1) docker network create --driver bridge playlistnetwork
+2)  docker run --name my-playlistpostgres --network playlistnetwork  -e POSTGRES_PASSWORD=open -e POSTGRES_DB=playlistdb -p 5432:5432  -d  postgres
+3) docker build -t playlistservice:dev .
+4) docker run --name playlist1   --network playlistnetwork  -e PORT=8080  -e SPRING_PROFILES_ACTIVE=docker   -p 1000:8080  -d  playlistservice:dev
 
-### command 2 - run the springboot application container from the docker image by passing two environment parameters -  ipaddress and application-docker.properties as profile.
-docker run -d -p 1000:8080 -e ipaddress=$ipaddress123  -e "SPRING_PROFILES_ACTIVE=docker"  --name guest1 --rm guestservice:dev
