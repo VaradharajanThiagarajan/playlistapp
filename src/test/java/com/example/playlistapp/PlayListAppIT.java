@@ -105,11 +105,25 @@ public class PlayListAppIT {
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isCreated());
 
-
+        //Add a song
         mockMvc.perform(post("/playlist/playlistone")
                 .content("Macarena")
                 .contentType(MediaType.TEXT_PLAIN)
         ).andExpect(status().isOk());
+
+        mockMvc.perform(get("/playlist/playlistone")
+        ).andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(1));
+
+        //Add another song
+        mockMvc.perform(post("/playlist/playlistone")
+                .content("Macarena 2")
+                .contentType(MediaType.TEXT_PLAIN)
+        ).andExpect(status().isOk());
+
+        mockMvc.perform(get("/playlist/playlistone")
+        ).andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(2));
 
     }
 
