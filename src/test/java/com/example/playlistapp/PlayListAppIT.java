@@ -91,6 +91,11 @@ public class PlayListAppIT {
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(jsonPath("message").value("Playlist name cannot be blank"));
     }
+//
+//
+//    Given a playlist
+//    When a song is added
+//    Then the playlist have one more song
     @Test
     public void addSongToPlayList() throws Exception {
         PlayListDto playListDto = new PlayListDto("playlistone");
