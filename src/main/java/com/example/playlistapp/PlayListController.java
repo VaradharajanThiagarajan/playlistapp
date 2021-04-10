@@ -4,27 +4,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 
 public class PlayListController {
-    ArrayList<PlayListDto> playList;
-
-    public void PlayListController(){
-        playList = new ArrayList<PlayListDto>();
+    PlayListService playListService;
+    public void PlayListController(PlayListService playListService){
+        this.playListService = playListService;
     }
 
     @PostMapping("playlist")
     @ResponseStatus(HttpStatus.CREATED)
     public void addPlayList(@RequestBody PlayListDto playListDto){
-      //  playList.add(playListDto);
-    }
+        this.playListService.create(playListDto);
 
+ }
 
-    @GetMapping("playlist")
- //   public String getPlayList(){return "[{\"name\":\"playlistone\"}]"; }
-    public ArrayList<PlayListDto> getBooks(){
-        return this.playList;
-    }
+//
+//    @GetMapping("playlist")
+//    public List<PlayListDto> getBooks(){
+//        return this.playListService.getPlayList();
+//    }
 
 }
