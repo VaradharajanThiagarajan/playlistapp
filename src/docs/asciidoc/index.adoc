@@ -1,15 +1,34 @@
 PlayList
 
-.request
-include::{snippets}/playlistone/http-request.adoc[]
-
-.response
-include::{snippets}/playlistone/http-response.adoc[]
-
-AddPlayList
+Get Playlist By Name
 
 .request
-include::{snippets}/AddPlayList/http-request.adoc[]
+include::../../../build/generated-snippets/GetPlayListByName/http-request.adoc[]
 
 .response
-include::{snippets}/AddPlayList/http-response.adoc[]
+include::../../../build/generated-snippets/GetPlayListByName/http-response.adoc[]
+
+Add PlayList
+
+.request
+include::../../../build/generated-snippets/AddPlayList/http-request.adoc[]
+
+.response
+include::../../../build/generated-snippets/AddPlayList/http-response.adoc[]
+
+Add Song to Playlist
+
+.request
+include::../../../build/generated-snippets/AddSongToPlaylist/http-request.adoc[]
+
+.response
+include::../../../build/generated-snippets/AddSongToPlaylist/http-response.adoc[]
+
+
+Delete Song from Playlist
+
+.request
+include::../../../build/generated-snippets/DeleteSongFromPlaylist/http-request.adoc[]
+
+.response
+include::../../../build/generated-snippets/DeleteSongFromPlaylist/http-response.adoc[]

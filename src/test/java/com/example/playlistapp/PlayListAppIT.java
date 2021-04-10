@@ -40,12 +40,6 @@ public class PlayListAppIT {
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isCreated())
          .andDo(document("AddPlayList"));
-
-//        mockMvc.perform(get("/playlist")
-//        ).andExpect(status().isOk())
-//                .andExpect(jsonPath("length()").value(1))
-//                .andExpect(jsonPath("[0].name").value("playlistone"));
-
     }
 
     @Test
@@ -60,7 +54,7 @@ public class PlayListAppIT {
         mockMvc.perform(get("/playlist/playlistone")
         ).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(0))
-                .andDo(document("playlistone"));
+                .andDo(document("GetPlayListByName"));
     }
 
 //    When a playlist is created with existing name
@@ -109,7 +103,8 @@ public class PlayListAppIT {
         mockMvc.perform(post("/playlist/playlistone")
                 .content("Macarena")
                 .contentType(MediaType.TEXT_PLAIN)
-        ).andExpect(status().isOk());
+        ).andExpect(status().isOk())
+        .andDo(document("AddSongToPlaylist"));
 
         mockMvc.perform(get("/playlist/playlistone")
         ).andExpect(status().isOk())
@@ -200,7 +195,8 @@ public class PlayListAppIT {
         mockMvc.perform(delete("/playlist/playlistone")
                 .content("Macarena 2")
                 .contentType(MediaType.TEXT_PLAIN)
-        ).andExpect(status().isOk());
+        ).andExpect(status().isOk())
+                .andDo(document("DeleteSongFromPlaylist"));
 
 
         mockMvc.perform(get("/playlist/playlistone")
