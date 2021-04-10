@@ -3,6 +3,8 @@ package com.example.playlistapp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlayListService {
 
@@ -19,4 +21,7 @@ public class PlayListService {
     }
 
 
+    public List<Object> getPlayListByName(String playlistName) {
+        return this.playListRepository.findByName(playlistName).g;
+    }
 }

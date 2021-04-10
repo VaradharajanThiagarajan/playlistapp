@@ -20,6 +20,12 @@ public class PlayListController {
         this.playListService.create(playListDto);
     }
 
+
+    @GetMapping("/playlist/{name}")
+    public List<Object> getPlaylist(@PathVariable String name){
+        return this.playListService.getPlayListByName(name);
+    }
+
 //
 //    @GetMapping("playlist")
 //    public List<PlayListDto> getBooks(){

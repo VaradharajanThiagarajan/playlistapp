@@ -43,4 +43,18 @@ public class PlayListAppIT {
 
     }
 
+    @Test
+    public void getPlaylistByName() throws Exception {
+        PlayListDto playListDto = new PlayListDto("playlistone");
+
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playListDto))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isCreated());
+
+        mockMvc.perform(get("/playlist/playlistone")
+        ).andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(0));
+    }
+
 }
