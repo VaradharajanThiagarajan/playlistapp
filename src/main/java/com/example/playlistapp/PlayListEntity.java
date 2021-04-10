@@ -41,4 +41,8 @@ public class PlayListEntity {
     public void setSongs(ArrayList<String> songs) {
         this.songs = songs;
     }
+
+    public void addSong(String song){
+        songs.add(song);
+    }
 }

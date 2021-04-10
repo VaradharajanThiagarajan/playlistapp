@@ -39,12 +39,7 @@ public class PlayListController {
 
     @PostMapping("/playlist/{name}")
     public Object postSongToPlayList(@PathVariable String name,@RequestBody String songName) throws Exception {
-
-
-
        return  playListService.update(name,songName);
-
-
     }
 
 //

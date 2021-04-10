@@ -2,6 +2,7 @@ package com.example.playlistapp;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.bytebuddy.build.ToStringPlugin;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -126,5 +127,47 @@ public class PlayListAppIT {
                 .andExpect(jsonPath("length()").value(2));
 
     }
+
+    //Tring to add a song to a playlist which does not exist
+    @Test
+    public void addSongToNonExistentPlayList() throws Exception {
+        //Add a song
+        mockMvc.perform(post("/playlist/playlistone")
+                .content("Macarena")
+                .contentType(MediaType.TEXT_PLAIN)
+        ).andExpect(jsonPath("message").value("Playlist does not exist"));
+    }
+
+//    Given a playlist has songs
+//    When retrieve the playlist
+//    Then see the songs on the playlist
+    @Test
+    public void getSongsFromPlayList() throws Exception {
+        PlayListDto playListDto = new PlayListDto("playlistone");
+
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playListDto))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isCreated());
+
+        //Add a song
+        mockMvc.perform(post("/playlist/playlistone")
+                .content("Song 1")
+                .contentType(MediaType.TEXT_PLAIN)
+        ).andExpect(status().isOk());
+
+        //Add a song
+        mockMvc.perform(post("/playlist/playlistone")
+                .content("Song 2")
+                .contentType(MediaType.TEXT_PLAIN)
+        ).andExpect(status().isOk());
+
+        mockMvc.perform(get("/playlist/playlistone")
+        ).andExpect(status().isOk())
+        .andExpect(jsonPath("[0]").value("Song 1"))
+        .andExpect(jsonPath("[1]").value("Song 2"));
+    }
+
+
 
 }

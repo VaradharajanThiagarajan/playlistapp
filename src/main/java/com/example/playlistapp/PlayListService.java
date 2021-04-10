@@ -43,17 +43,12 @@ public class PlayListService {
     }
 
     public Object update(String playListName, String songName) throws Exception {
-        ArrayList<String> songs=new ArrayList<>();
         PlayListEntity playListEntity=playListRepository.findByName(playListName);
         if (playListEntity!=null){
-            if (playListEntity.getSongs()!=null)songs=playListEntity.getSongs();
-            songs.add(songName);
-            playListEntity.setSongs(songs);
-
-
+            playListEntity.addSong(songName);
         }
         else {
-            return new Exception("Playlist does not exists");
+            return new Exception("Playlist does not exist");
         }
         return playListRepository.save(playListEntity);
     }
