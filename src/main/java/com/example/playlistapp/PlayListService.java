@@ -30,4 +30,12 @@ public class PlayListService {
 
         return playListEntity.getSongs();
     }
+
+    public PlayListDto findByName(PlayListDto playListDto) {
+        PlayListEntity playListEntity = this.playListRepository.findByName(playListDto.getName());
+        if (playListEntity != null)
+            return new PlayListDto(playListEntity.getName());
+        else
+            return null;
+    }
 }

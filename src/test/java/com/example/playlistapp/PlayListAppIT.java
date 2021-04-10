@@ -1,5 +1,6 @@
 package com.example.playlistapp;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,35 @@ public class PlayListAppIT {
         ).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(0))
                 .andDo(document("playlistone"));
+    }
+
+//    When a playlist is created with existing name
+//    Then a message is returned that it was unsuccessful
+    @Test
+    public void duplicatePlaylistTest() throws Exception {
+        PlayListDto playListDto = new PlayListDto("playlistone");
+
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playListDto))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isCreated());
+
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playListDto))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(jsonPath("message").value("Playlist already exists"));
+    }
+
+//    When a playlist is created without a name
+//    Then a message is returned that a name is required.
+    @Test
+    public void blankPlaylistNameTest() throws Exception {
+        PlayListDto playListDto = new PlayListDto("");
+
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playListDto))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(jsonPath("message").value("Playlist name cannot be blank"));
     }
 
 }

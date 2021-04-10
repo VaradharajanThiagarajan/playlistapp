@@ -16,8 +16,15 @@ public class PlayListController {
 
     @PostMapping("playlist")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addPlayList(@RequestBody PlayListDto playListDto){
-        this.playListService.create(playListDto);
+    public Object addPlayList(@RequestBody PlayListDto playListDto){
+        PlayListDto playListDto1 = this.playListService.findByName(playListDto);
+        if (playListDto1 == null) {
+            this.playListService.create(playListDto);
+            return null;
+        }
+        else{
+            return new Exception("Playlist already exists");
+        }
     }
 
 

@@ -7,6 +7,14 @@ in three environments listed below.
 2) Docker container.
 3) Heroku cloud platform.
 
+## API Specifications
+Endpoint    | Method| Request Body| Response
+------------|-------|-------------|----------
+/playlist  |  POST  | {"name":"abc"}| 201
+/playlist/playlist name |  GET | |["song1", "song2"]
+/playlist/playlist_name|POST|"song1"|201
+/playlist/playlist_name|DELETE|"song1"|
+
 ## Instructions for Execution in Docker container hosted in your local desktop( windows Powershell)
 
 ### command 1 - Define the network and add the postgres as well as springboot application container to the network
@@ -18,10 +26,10 @@ in three environments listed below.
 
 ## Instruction for Heroku 
 
-$ heroku login
-$ heroku container:login
-$ heroku container:push web
-$ heroku container:release web
+    $ heroku login
+    $ heroku container:login
+    $ heroku container:push web
+    $ heroku container:release web
 
 Finally verified the Herokuwebapp
 
