@@ -17,5 +17,5 @@ public class PlayListController {
     }
 
     @GetMapping("playlist")
-    public String getPlayList(){return "[{}]"; }
+    public String getPlayList(){return "[{\"name\":\"playlistone\"}]"; }
 }

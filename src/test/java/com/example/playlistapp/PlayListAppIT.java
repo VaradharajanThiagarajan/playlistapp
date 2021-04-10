@@ -30,14 +30,17 @@ public class PlayListAppIT {
     @Test
     public void addPlayList() throws Exception {
 
+        PlayListDto playListDto = new PlayListDto("playlistone");
         mockMvc.perform(post("/playlist")
-                .content("")
+
+                .content(objectMapper.writeValueAsString(playListDto))
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isCreated());
 
         mockMvc.perform(get("/playlist")
         ).andExpect(status().isOk())
-                .andExpect(jsonPath("length()").value(1));
+                .andExpect(jsonPath("length()").value(1))
+                .andExpect(jsonPath("[0].name").value("playlistone"));
 
     }
 
